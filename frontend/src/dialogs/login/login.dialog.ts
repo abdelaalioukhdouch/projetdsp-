@@ -14,7 +14,7 @@ import { AuthService } from 'src/services/auth.service';
 export class LoginDialog implements OnInit {
   isLoading = false;
   hide = "password";
-  
+
   loginForm: FormGroup;
 
   constructor(private authService: AuthService, private dialog: MatDialog,
@@ -43,23 +43,23 @@ export class LoginDialog implements OnInit {
 
   register() {
     const dialogCard = this.dialog.open(RegisterDialog, {
-        width: '70%',
-        height: '80%',
-        panelClass: 'mat-dialog-any-padding',
-        autoFocus: false
+      width: '70%',
+      height: '80%',
+      panelClass: 'mat-dialog-any-padding',
+      autoFocus: false
     });
 
     dialogCard.afterClosed().subscribe(async rslt => {
-        if (!(rslt === undefined)) {
-            //const dialogCard = this.dialog.open(WelcomeDialog, {
-              //  width: '70rem',
-                //height: '30rem',
-               // panelClass: 'mat-dialog-information',
-                //autoFocus: false
-           // });
-        }
+      if (!(rslt === undefined)) {
+        //const dialogCard = this.dialog.open(WelcomeDialog, {
+        //  width: '70rem',
+        //height: '30rem',
+        // panelClass: 'mat-dialog-information',
+        //autoFocus: false
+        // });
+      }
     });
-}
+  }
 
   isValid(controlName) {
     return this.loginForm.get(controlName).invalid && this.loginForm.get(controlName).touched;
@@ -68,8 +68,17 @@ export class LoginDialog implements OnInit {
   login(): void {
     this.authService
       .login(this.loginForm.value.email, this.loginForm.value.password)
-      .subscribe();
-      console.log("user");
+      .subscribe(res => {
+        if(res) {
+          this._router.navigate(['/']);
+          this.dialog.closeAll();
+          alert("You are logged in");
+        } else {
+          
+          alert("Unauthenticated. Try again!");
+        }
+      });
+    console.log("user");
   }
 
   movetoregister() {

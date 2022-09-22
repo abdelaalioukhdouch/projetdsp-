@@ -14,7 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
@@ -29,6 +29,12 @@ import { PrivacyPolicy } from 'src/views/privacy-policy/privacy-policy.view';
 import { ContactView } from 'src/views/contact/contact.view';
 import { ParticipateComponent } from 'src/components/participate/participate';
 import { AddUserComponent } from 'src/components/user/add-user/add-user.component';
+import { SharedModule } from '../modules/shared.module';
+import { LoaderService } from '../services/loader.service';
+import { LoaderInterceptor } from '../interceptors/loader-interceptor.service';
+import { TokenInterceptor } from '../interceptors/token.interceptor';
+import { SiteLayoutComponent } from './site-layout/site-layout.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -36,12 +42,14 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     FooterComponent,
     HomeComponent,
     NavbarComponent,
     ParticipateComponent,
+    SiteLayoutComponent,
+    DialogComponent,
     
     //Views
     LegalsInformations,
@@ -52,12 +60,12 @@ const appRoutes: Routes = [
     LoginDialog,
     RegisterDialog,
     AddUserComponent,
-    
-    //Service
-    
-  ],
+  //Service
+      SiteLayoutComponent
+   ],
   imports: [
     BrowserModule,
+    SharedModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
@@ -72,9 +80,17 @@ const appRoutes: Routes = [
     HttpClientModule,
     SectionsModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

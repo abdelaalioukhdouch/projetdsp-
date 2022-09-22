@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { TicketService } from 'src/services/ticket.service';
+import { TicketService } from '../../services/ticket.service';
 
 @Component({
   selector: 'participate',

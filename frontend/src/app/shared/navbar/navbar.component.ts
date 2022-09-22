@@ -1,3 +1,4 @@
+import { ProfileService } from 'src/services/profile.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location} from '@angular/common';
@@ -5,7 +6,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoginDialog } from 'src/dialogs/login/login.dialog';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/services/auth.service';
-import { ProfileService } from 'src/services/profile.service';
 
 @Component({
     selector: 'app-navbar',
@@ -41,7 +41,28 @@ export class NavbarComponent implements OnInit {
           }
         });
     }
+    getProfile() {
+      this.profileService.getProfileByCreatorId().subscribe(prof => {
+        this.profileisSet = true
+        this.username = prof.profile.username
+        this.profile = {
+          id: prof.profile._id,
+          username: prof.profile.username,
+          bio: prof.profile.bio,
+          imagePath: prof.profile.imagePath,
+          creator: prof.profile.creator
+        };
+      },
+        err => {
+          this.profileisSet = false
+          this.username = null
+        })
+  
+    }
 
+    onLogout() {
+      this.authService.logout();
+    }
 
     logIn(): void {
       const dialogCard = this.dialog.open(LoginDialog, {
@@ -76,28 +97,5 @@ export class NavbarComponent implements OnInit {
         else {
             return false;
         }
-    }
-
-    getProfile() {
-      this.profileService.getProfileByCreatorId().subscribe(prof => {
-        this.profileisSet = true
-        this.username = prof.profile.username
-        this.profile = {
-          id: prof.profile._id,
-          username: prof.profile.username,
-          bio: prof.profile.bio,
-          imagePath: prof.profile.imagePath,
-          creator: prof.profile.creator
-        };
-      },
-        err => {
-          this.profileisSet = false
-          this.username = null
-        })
-  
-    }
-
-    onLogout() {
-      this.authService.logout();
     }
 }

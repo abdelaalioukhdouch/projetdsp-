@@ -5,4 +5,3 @@ export interface Profile {
     imagePath: string;
     creator: string;
   }
-  

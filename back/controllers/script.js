@@ -26,21 +26,21 @@ exports.addTickets = async (req, res) => {
 
           i < 20
 
-            ? "Coffret découverte d'une valeur de 69€"
+            ? "Discovery Box Worth Є69"
 
             : i < 50
 
-            ? "Coffret découverte d'une valeur de 39€"
+            ? "Discovery Box Worth Є39"
 
             : i < 100
 
-            ? "Boite de 100g de thé signature"
+            ? "Box of 100g Signature Tea"
 
             : i < 200
 
-            ? "Boite de 100g de thé détox ou thé infusion"
+            ? "Box of 100g Detox Tea"
 
-            : "Un infuseur à thé",
+            : "Tea Infuser",
 
         isClaimed: false,
 

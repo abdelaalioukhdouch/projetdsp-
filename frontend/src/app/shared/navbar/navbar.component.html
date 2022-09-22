@@ -56,13 +56,13 @@
           </a>
           <div class="dropdown-menu">
             <a [routerLink]="['/landing']" class="dropdown-item">Landing</a>
-            <a [routerLink]="['/profile']" class="dropdown-item">Profile</a>
+            <a [routerLink]="['/user-profile']" class="dropdown-item">Profile</a>
             <a [routerLink]="['/login']" class="dropdown-item">Login</a>
             <!--<a [routerLink]="['/register']" class="dropdown-item">Register</a>-->
           </div>
         </li>
 
-         <li class="nav-item dropdown" *ngIf="userIsAuthenticated">
+<li class="nav-item dropdown" *ngIf="userIsAuthenticated">
           <a class="nav-link no-caret" data-toggle="dropdown" role="button">
             <i class="ni ni-collection d-lg-none"></i>
             <span class="nav-link-inner--text">Dashboard</span>
@@ -74,6 +74,7 @@
             <!--<a [routerLink]="['/register']" class="dropdown-item">Register</a>-->
           </div>
         </li>
+
       </ul>
       <ul class="navbar-nav align-items-lg-center ml-lg-auto">
         <li class="nav-item">
@@ -107,9 +108,8 @@
             <span class="btn-inner--icon">
             <i class="icon-login"></i>
             </span>
-            <span class="nav-link-inner--text" *ngIf="!userIsAuthenticated" (click)="logIn()">Se connecter</span>
+ <span class="nav-link-inner--text" *ngIf="!userIsAuthenticated" (click)="logIn()">Se connecter</span>
             <span class="nav-link-inner--text" *ngIf="userIsAuthenticated" (click)="onLogout()">Se deconnecter</span>
-
           </a>
         </li>
       </ul>

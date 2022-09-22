@@ -67,7 +67,7 @@ exports.loginUser = async (req, res) => {
     // find user by email it could be any for example name,address...
     const user = await User.findOne({
       email: email.toLowerCase(),
-    });
+    }).select("+password");
     if (!user) return res.status(400).json({ message: INVALID_EMAIL });
 
     const is_equal = await verifyPassword(password, user.password);
@@ -75,7 +75,7 @@ exports.loginUser = async (req, res) => {
     const token = generateToken(
       email.toLowerCase(),
       user._id.toString(),
-      process.env.USER_SECRET
+      process.env.USER_SECRET || 'this-is-secret'
     );
     await res.status(200).json({
       message: USER_LOGIN_SUCCESS,

@@ -6,6 +6,7 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 
 const authRoutes = require("./routes/api/auth/auth");
+const usersRoutes = require("./routes/api/user/user");
 const scriptRoutes = require("./routes/api/script/script");
 const ticketRoutes = require("./routes/api/ticket/ticket");
 
@@ -34,6 +35,7 @@ app.use((req, res, next) => {
 app.use(cors());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/users", usersRoutes);
 app.use("/api/script", scriptRoutes);
 app.use("/api/ticket", ticketRoutes);
 app.get("/test", (req, res) => {

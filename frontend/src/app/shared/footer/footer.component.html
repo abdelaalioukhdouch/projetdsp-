@@ -1,5 +1,5 @@
-<footer #target class="footer" [ngClass]="{'has-cards': getPath()!=='/profile' && getPath()!=='/register' && getPath()!=='/login'}">
-  <div class="container container-lg" *ngIf="getPath()!=='/profile' && getPath()!=='/register' && getPath()!=='/login'">
+<footer #target class="footer" [ngClass]="{'has-cards': getPath()!=='/user-profile' && getPath()!=='/register' && getPath()!=='/login'}">
+  <div class="container container-lg" *ngIf="getPath()!=='/user-profile' && getPath()!=='/register' && getPath()!=='/login'">
     <div class="row">
       <div class="col-md-6 mb-5 mb-md-0">
         <div class="card card-lift--hover shadow border-0">
@@ -10,7 +10,7 @@
       </div>
       <div class="col-md-6 mb-5 mb-lg-0">
         <div class="card card-lift--hover shadow border-0">
-          <a [routerLink]="['/profile']" title="Profile Page">
+          <a [routerLink]="['/user-profile']" title="Profile Page">
             <img src="./assets/img/images/footer-tea3.jpeg" class="card-img">
           </a>
         </div>
@@ -18,7 +18,7 @@
     </div>
   </div>
   <div class="container">
-    <div class="row row-grid align-items-center" [ngClass]="{'my-md': getPath()!=='/profile' && getPath()!=='/register' && getPath()!=='/login', 'mb-5':getPath()==='/profile' || getPath()==='/register' || getPath()==='/login'}">
+    <div class="row row-grid align-items-center" [ngClass]="{'my-md': getPath()!=='/user-profile' && getPath()!=='/register' && getPath()!=='/login', 'mb-5':getPath()==='/user-profile' || getPath()==='/register' || getPath()==='/login'}">
       <div class="col-lg-6">
         <h3 class="text-primary font-weight-light mb-2"></h3>
         <h4 class="mb-0 font-weight-light">Nos thés bio de qualité faits pour vous.</h4>

@@ -3,6 +3,7 @@ import { CanActivate, Router } from "@angular/router";
 
 import { Observable } from "rxjs";
 import { AuthService } from "./auth.service";
+import { CacheHandler } from '../utils/cache-handler';
 
 @Injectable({
   providedIn: "root",
@@ -10,10 +11,10 @@ import { AuthService } from "./auth.service";
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(): Observable<boolean> {
-    if (!this.authService.isUserLoggedIn$.value) {
+  canActivate() {
+    if (!CacheHandler.getStoredToken()) {
       this.router.navigate(["signup"]);
     }
-    return this.authService.isUserLoggedIn$;
+    return true;
   }
 }
