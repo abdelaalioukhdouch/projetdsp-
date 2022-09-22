@@ -6,6 +6,8 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 
 const authRoutes = require("./routes/api/auth/auth");
+const scriptRoutes = require("./routes/api/script/script");
+const ticketRoutes = require("./routes/api/ticket/ticket");
 
 const port = process.env.PORT;
 
@@ -32,6 +34,8 @@ app.use((req, res, next) => {
 app.use(cors());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/script", scriptRoutes);
+app.use("/api/ticket", ticketRoutes);
 app.get("/test", (req, res) => {
   res.status(200).json({
     message: "test",

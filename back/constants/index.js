@@ -9,6 +9,8 @@ module.exports = {
     INVALID_EMAIL: "Invalid Email",
     INVALID_PASSWORD_EQUAL: "Password Not Equal",
     USER_NOT_FOUND: "User Not Found",
+    TICKET_NOT_FOUND: 'Invalid Ticket Code',
+    TICKET_ALREADY_USED: 'Ticket Already Claimed'
   
   
   };
